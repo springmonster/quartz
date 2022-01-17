@@ -275,7 +275,9 @@ public class QuartzSchedulerThread extends Thread {
                     }
                 }
 
+                // kuanghc1：先获取可用的线程数
                 int availThreadCount = qsRsrcs.getThreadPool().blockForAvailableThreads();
+                
                 if(availThreadCount > 0) { // will always be true, due to semantics of blockForAvailableThreads...
 
                     List<OperableTrigger> triggers;
@@ -283,7 +285,9 @@ public class QuartzSchedulerThread extends Thread {
                     long now = System.currentTimeMillis();
 
                     clearSignaledSchedulingChange();
+                    
                     try {
+                        // kuanghc1：这里是获取锁的逻辑
                         triggers = qsRsrcs.getJobStore().acquireNextTriggers(
                                 now + idleWaitTime, Math.min(availThreadCount, qsRsrcs.getMaxBatchSize()), qsRsrcs.getBatchTimeWindow());
                         acquiresFailed = 0;
@@ -395,6 +399,7 @@ public class QuartzSchedulerThread extends Thread {
                                 continue;
                             }
 
+                            // kuanghc1：这里实际去执行 JobRunShell
                             if (qsRsrcs.getThreadPool().runInThread(shell) == false) {
                                 // this case should never happen, as it is indicative of the
                                 // scheduler being shutdown or a bug in the thread pool or

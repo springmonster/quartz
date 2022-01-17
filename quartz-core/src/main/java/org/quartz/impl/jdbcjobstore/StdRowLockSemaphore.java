@@ -39,6 +39,7 @@ public class StdRowLockSemaphore extends DBSemaphore {
      * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
 
+    // kuanghc1: 这里有select ... for update语句
     public static final String SELECT_FOR_LOCK = "SELECT * FROM "
             + TABLE_PREFIX_SUBST + TABLE_LOCKS + " WHERE " + COL_SCHEDULER_NAME + " = " + SCHED_NAME_SUBST
             + " AND " + COL_LOCK_NAME + " = ? FOR UPDATE";

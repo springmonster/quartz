@@ -506,6 +506,7 @@ public interface StdJDBCConstants extends Constants {
             + COL_SCHEDULER_NAME + " = " + SCHED_NAME_SUBST
             + " AND " + COL_TRIGGER_STATE + " = ? AND " + COL_NEXT_FIRE_TIME + " = ?";
 
+    // kuanghc1：哪里有select for update
     String SELECT_NEXT_TRIGGER_TO_ACQUIRE = "SELECT "
         + COL_TRIGGER_NAME + ", " + COL_TRIGGER_GROUP + ", "
         + COL_NEXT_FIRE_TIME + ", " + COL_PRIORITY + " FROM "

@@ -2590,6 +2590,7 @@ public class StdJDBCDelegate implements DriverDelegate, StdJDBCConstants {
      *          
      * @return A (never null, possibly empty) list of the identifiers (Key objects) of the next triggers to be fired.
      */
+    // kuanghc1: 这里获取锁，为什么叫std，应该是standard的意思
     public List<TriggerKey> selectTriggerToAcquire(Connection conn, long noLaterThan, long noEarlierThan, int maxCount)
         throws SQLException {
         PreparedStatement ps = null;
